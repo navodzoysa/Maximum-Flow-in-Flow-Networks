@@ -26,6 +26,10 @@ public class Edge {
         return flow;
     }
 
+    public void getParentNode() {
+
+    }
+
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
