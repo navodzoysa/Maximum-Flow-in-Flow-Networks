@@ -5,28 +5,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
-    private String fileName;
+    private final String fileName;
 
     public Parser(String fileName) {
         this.fileName = fileName;
     }
 
-    public List<Integer> readFile() {
-        List<Integer> graphData = new ArrayList<>();
+    public List<List<Integer>> readFile() {
+        List<List<Integer>> graphData = new ArrayList<>();
+        List<Integer> innerGraphData;
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String node = bufferedReader.readLine();
-            graphData.add(Integer.parseInt(node));
+
+            innerGraphData = new ArrayList<>();
+            innerGraphData.add(Integer.parseInt(node));
+            graphData.add(innerGraphData);
 
             String edges = "";
             while((edges = bufferedReader.readLine()) != null) {
                 String [] spliter = edges.split(" ");
+                innerGraphData = new ArrayList<>();
                 for (String s : spliter) {
-                    graphData.add(Integer.parseInt(s));
+                    innerGraphData.add(Integer.parseInt(s));
                 }
+                graphData.add(innerGraphData);
             }
-
+            System.out.println(graphData);
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e) {
