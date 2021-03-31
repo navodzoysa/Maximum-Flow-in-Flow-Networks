@@ -6,7 +6,6 @@ public class Graph {
     private int numberOfNodes;
     private int source;
     private int sink;
-    private List<Edge> edges;
     private LinkedList<Edge>[] adjacencyList;
 
     public Graph(List<List<Integer>> parsedList) {
@@ -16,7 +15,7 @@ public class Graph {
         for(int i = 0; i < numberOfNodes; i++) {
             adjacencyList[i] = new LinkedList<>();
         }
-        this.edges = generateGraph(parsedList);
+        this.adjacencyList = generateGraph(parsedList);
         this.source = 0;
         this.sink = numberOfNodes - 1;
     }
@@ -33,25 +32,21 @@ public class Graph {
         return sink;
     }
 
-    public List<Edge> getGraph() {
-        return edges;
+    public LinkedList<Edge>[] getGraph() {
+        return adjacencyList;
     }
 
-    public List<Edge> generateGraph(List<List<Integer>> parsedList) {
-        System.out.println(parsedList);
-        this.edges = new ArrayList<>();
-
+    public LinkedList<Edge>[] generateGraph(List<List<Integer>> parsedList) {
         for (List<Integer> integers : parsedList) {
-            System.out.println(integers);
             adjacencyList[integers.get(0)].add(new Edge(integers.get(0), integers.get(1), integers.get(2)));
         }
+        return adjacencyList;
+    }
 
+    public void printGraph() {
         for(int i = 0; i < numberOfNodes; i++) {
             LinkedList<Edge> list = adjacencyList[i];
-            for (Edge edge : list) {
-                System.out.println(edge);
-            }
+            System.out.println(list);
         }
-        return edges;
     }
 }

@@ -14,6 +14,7 @@ public class Parser {
     public List<List<Integer>> readFile() {
         List<List<Integer>> graphData = new ArrayList<>();
         List<Integer> innerGraphData;
+
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -23,7 +24,7 @@ public class Parser {
             innerGraphData.add(Integer.parseInt(node));
             graphData.add(innerGraphData);
 
-            String edges = "";
+            String edges;
             while((edges = bufferedReader.readLine()) != null) {
                 String [] spliter = edges.split(" ");
                 innerGraphData = new ArrayList<>();
@@ -32,7 +33,6 @@ public class Parser {
                 }
                 graphData.add(innerGraphData);
             }
-            System.out.println(graphData);
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e) {
