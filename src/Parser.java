@@ -18,7 +18,7 @@ public class Parser {
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String node = bufferedReader.readLine();
+            String node = bufferedReader.readLine().trim();
 
             innerGraphData = new ArrayList<>();
             innerGraphData.add(Integer.parseInt(node));

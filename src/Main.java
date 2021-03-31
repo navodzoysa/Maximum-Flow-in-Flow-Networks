@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -9,7 +8,12 @@ public class Main {
         Graph graph = new Graph(parsedList);
 
         int numberOfNodes = graph.getNumberOfNodes();
+        int source = graph.getSource();
+        int sink = graph.getSink();
+
         graph.printGraph();
         System.out.println(numberOfNodes);
+        MaxFlow maxFlow = new MaxFlow(source, sink, graph);
+        maxFlow.breadFirstSearch();
     }
 }
