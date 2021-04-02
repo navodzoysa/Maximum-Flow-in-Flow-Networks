@@ -30,7 +30,30 @@ public class Edge {
         if(node == startNode) {
             return endNode;
         }
-        return startNode;
+        else if(node == endNode) {
+            return startNode;
+        }
+        return -1;
+    }
+
+    public int residualCapacity(int node) {
+        if(node == startNode) {
+            return flow;
+        }
+        else if(node == endNode) {
+            return capacity - flow;
+        }
+        return -1;
+    }
+
+    public int addFlow(int node, int newFlow) {
+        if(node == startNode) {
+            flow -= newFlow;
+        }
+        else if(node == endNode) {
+            flow += newFlow;
+        }
+        return -1;
     }
 
     public void setCapacity(int capacity) {

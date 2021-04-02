@@ -11,10 +11,7 @@ public class Main {
         int source = graph.getSource();
         int sink = graph.getSink();
 
-        graph.printGraph();
-        System.out.println(numberOfNodes);
         MaxFlow maxFlow = new MaxFlow(source, sink, graph);
-        maxFlow.breadFirstSearch();
-        System.out.println(maxFlow.calculateMaxFlow());
+        System.out.println("Max Flow = " + maxFlow.calculateMaxFlow());
     }
 }

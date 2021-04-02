@@ -1,14 +1,11 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 public class MaxFlow {
     private int source;
     private int sink;
     private Graph graph;
-    private int[] parentNodes;
-    private List<Edge> augmentedPathList;
+    private Edge[] parentNodes;
     private int maxFlow;
 
     public MaxFlow(int source, int sink, Graph graph) {
@@ -20,50 +17,40 @@ public class MaxFlow {
     public int calculateMaxFlow() {
         int flow = Integer.MAX_VALUE;
         while (breadFirstSearch()) {
-            for(int i = sink; i != source; i = augmentedPathList.get(i).getAdjacentNode(i)) {
-                flow = Math.min(flow, augmentedPathList.get(i).getCapacity());
+            System.out.println("Loop augmented path " + Arrays.toString(parentNodes));
+            for(int i = sink; i != source; i = parentNodes[i].getAdjacentNode(i)) {
+                flow = Math.min(flow, parentNodes[i].residualCapacity(i));
+                System.out.println("FLow " + flow);
             }
-            for(int i = sink; i != source; i = augmentedPathList.get(i).getAdjacentNode(i)) {
-                augmentedPathList.get(i).setCapacity(augmentedPathList.get(i).getCapacity() - flow);
-                augmentedPathList.get(i).setFlow(flow);
+            for(int i = sink; i != source; i = parentNodes[i].getAdjacentNode(i)) {
+                System.out.println("Augment path = "+ i + " to " + parentNodes[i].getAdjacentNode(i));
+                parentNodes[i].addFlow(i, flow);
             }
+            maxFlow += flow;
         }
-        return maxFlow += flow;
+        return maxFlow;
     }
 
     public boolean breadFirstSearch() {
         boolean[] visitedNodes = new boolean[graph.getNumberOfNodes()];
-        parentNodes = new int[graph.getNumberOfNodes()];
+        parentNodes = new Edge[graph.getNumberOfNodes()];
         LinkedList<Edge>[] adjacencyList = graph.getGraph();
-
-        System.out.println(Arrays.toString(adjacencyList));
 
         LinkedList<Integer> queue = new LinkedList<>();
         queue.add(source);
         visitedNodes[source] = true;
-        parentNodes[source] = -1;
-
-        augmentedPathList = new ArrayList<>();
-
-        System.out.println(Arrays.toString(visitedNodes));
-        System.out.println(Arrays.toString(parentNodes));
 
         while(queue.size() != 0) {
             int node = queue.poll();
             for(Edge edge : adjacencyList[node]) {
                 int adjacentNode = edge.getAdjacentNode(node);
-                if(!visitedNodes[adjacentNode] && edge.getCapacity() > 0) {
-                    parentNodes[adjacentNode] = node;
-                    augmentedPathList.add(edge);
+                if(!visitedNodes[adjacentNode] && edge.residualCapacity(adjacentNode) > 0) {
+                    parentNodes[adjacentNode] = edge;
                     visitedNodes[adjacentNode] = true;
                     queue.add(adjacentNode);
                 }
-                System.out.println("Node = " + node + " Adjacent Node = " + adjacentNode);
             }
-            System.out.println(Arrays.toString(parentNodes));
-            System.out.println(Arrays.toString(visitedNodes));
-            System.out.println(augmentedPathList);
         }
-        return false;
+        return visitedNodes[sink];
     }
 }
