@@ -26,8 +26,11 @@ public class Edge {
         return flow;
     }
 
-    public void getParentNode() {
-
+    public int getAdjacentNode(int node) {
+        if(node == startNode) {
+            return endNode;
+        }
+        return startNode;
     }
 
     public void setCapacity(int capacity) {

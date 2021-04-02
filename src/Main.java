@@ -15,5 +15,6 @@ public class Main {
         System.out.println(numberOfNodes);
         MaxFlow maxFlow = new MaxFlow(source, sink, graph);
         maxFlow.breadFirstSearch();
+        System.out.println(maxFlow.calculateMaxFlow());
     }
 }
