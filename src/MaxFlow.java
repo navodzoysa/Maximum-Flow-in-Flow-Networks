@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.*;
 
 public class MaxFlow {
     private int source;
@@ -17,17 +16,24 @@ public class MaxFlow {
     public int calculateMaxFlow() {
         int flow = Integer.MAX_VALUE;
         while (breadFirstSearch()) {
-            System.out.println("Loop augmented path " + Arrays.toString(augmentedPathList));
             for(int i = sink; i != source; i = augmentedPathList[i].getAdjacentNode(i)) {
                 flow = Math.min(flow, augmentedPathList[i].residualCapacity(i));
-                System.out.println("FLow " + flow);
             }
+            List<String> pathTaken = new ArrayList<>();
             for(int i = sink; i != source; i = augmentedPathList[i].getAdjacentNode(i)) {
-                System.out.println("Augment path = "+ i + " to " + augmentedPathList[i].getAdjacentNode(i));
-                System.out.println("Residual capacity before adding flow for " + i + " is " + augmentedPathList[i].residualCapacity(i));
                 augmentedPathList[i].addFlow(i, flow);
-                System.out.println("Residual capacity for after adding flow for " + i + " is " + augmentedPathList[i].residualCapacity(i));
+                pathTaken.add("Edge (" + augmentedPathList[i].getAdjacentNode(i) + " > " + i +
+                        ") Original Capacity = " + augmentedPathList[i].getCapacity() + "/" +
+                        augmentedPathList[i].getCapacity() + ", Flow = " + augmentedPathList[i].getFlow() + "/" +
+                        augmentedPathList[i].getCapacity() + ", Residual Capacity = " +
+                        augmentedPathList[i].residualCapacity(i) + "/" + augmentedPathList[i].getCapacity());
             }
+            Collections.reverse(pathTaken);
+            System.out.println("Augmented Path | Minimum Capacity allowed = " + flow + "\n");
+            for(String string : pathTaken) {
+                System.out.println(string);
+            }
+            System.out.println("--------------------------------------");
             maxFlow += flow;
         }
         return maxFlow;
