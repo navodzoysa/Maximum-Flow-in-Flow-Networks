@@ -5,7 +5,7 @@ public class MaxFlow {
     private int source;
     private int sink;
     private Graph graph;
-    private Edge[] parentNodes;
+    private Edge[] augmentedPathList;
     private int maxFlow;
 
     public MaxFlow(int source, int sink, Graph graph) {
@@ -17,14 +17,16 @@ public class MaxFlow {
     public int calculateMaxFlow() {
         int flow = Integer.MAX_VALUE;
         while (breadFirstSearch()) {
-            System.out.println("Loop augmented path " + Arrays.toString(parentNodes));
-            for(int i = sink; i != source; i = parentNodes[i].getAdjacentNode(i)) {
-                flow = Math.min(flow, parentNodes[i].residualCapacity(i));
+            System.out.println("Loop augmented path " + Arrays.toString(augmentedPathList));
+            for(int i = sink; i != source; i = augmentedPathList[i].getAdjacentNode(i)) {
+                flow = Math.min(flow, augmentedPathList[i].residualCapacity(i));
                 System.out.println("FLow " + flow);
             }
-            for(int i = sink; i != source; i = parentNodes[i].getAdjacentNode(i)) {
-                System.out.println("Augment path = "+ i + " to " + parentNodes[i].getAdjacentNode(i));
-                parentNodes[i].addFlow(i, flow);
+            for(int i = sink; i != source; i = augmentedPathList[i].getAdjacentNode(i)) {
+                System.out.println("Augment path = "+ i + " to " + augmentedPathList[i].getAdjacentNode(i));
+                System.out.println("Residual capacity before adding flow for " + i + " is " + augmentedPathList[i].residualCapacity(i));
+                augmentedPathList[i].addFlow(i, flow);
+                System.out.println("Residual capacity for after adding flow for " + i + " is " + augmentedPathList[i].residualCapacity(i));
             }
             maxFlow += flow;
         }
@@ -33,7 +35,7 @@ public class MaxFlow {
 
     public boolean breadFirstSearch() {
         boolean[] visitedNodes = new boolean[graph.getNumberOfNodes()];
-        parentNodes = new Edge[graph.getNumberOfNodes()];
+        augmentedPathList = new Edge[graph.getNumberOfNodes()];
         LinkedList<Edge>[] adjacencyList = graph.getGraph();
 
         LinkedList<Integer> queue = new LinkedList<>();
@@ -45,12 +47,17 @@ public class MaxFlow {
             for(Edge edge : adjacencyList[node]) {
                 int adjacentNode = edge.getAdjacentNode(node);
                 if(!visitedNodes[adjacentNode] && edge.residualCapacity(adjacentNode) > 0) {
-                    parentNodes[adjacentNode] = edge;
+                    if(adjacentNode == sink) {
+                        augmentedPathList[adjacentNode] = edge;
+                        visitedNodes[adjacentNode] = true;
+                        return true;
+                    }
+                    augmentedPathList[adjacentNode] = edge;
                     visitedNodes[adjacentNode] = true;
                     queue.add(adjacentNode);
                 }
             }
         }
-        return visitedNodes[sink];
+        return false;
     }
 }

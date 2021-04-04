@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Graph {
     private int numberOfNodes;
-    private int numberofEdges;
+    private int numberOfEdges;
     private int source;
     private int sink;
     private LinkedList<Edge>[] adjacencyList;
@@ -12,7 +12,7 @@ public class Graph {
     public Graph(List<List<Integer>> parsedList) {
         this.numberOfNodes = parsedList.get(0).get(0);
         parsedList.remove(0);
-        this.numberofEdges = parsedList.size();
+        this.numberOfEdges = parsedList.size();
         adjacencyList = new LinkedList[numberOfNodes];
         for(int i = 0; i < numberOfNodes; i++) {
             adjacencyList[i] = new LinkedList<>();
@@ -27,7 +27,7 @@ public class Graph {
     }
 
     public int getNumberOfEdges() {
-        return numberofEdges;
+        return numberOfEdges;
     }
 
     public int getSource() {
