@@ -7,9 +7,12 @@ public class Main {
 
         Graph graph = new Graph(parsedList);
 
-        int numberOfNodes = graph.getNumberOfNodes();
+        System.out.println("Number of Nodes - " + graph.getNumberOfNodes());
+        System.out.println("Number of Edges - " + graph.getNumberOfEdges());
+
         int source = graph.getSource();
         int sink = graph.getSink();
+        graph.printGraph();
 
         MaxFlow maxFlow = new MaxFlow(source, sink, graph);
         System.out.println("Max Flow = " + maxFlow.calculateMaxFlow());

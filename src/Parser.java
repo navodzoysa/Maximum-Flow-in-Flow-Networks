@@ -35,6 +35,7 @@ public class Parser {
             }
             bufferedReader.close();
             fileReader.close();
+            System.out.println("Flow network from " + fileName.substring(14) + " parsed and loaded succesfully");
         } catch (IOException e) {
             e.printStackTrace();
         }

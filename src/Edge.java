@@ -46,31 +46,21 @@ public class Edge {
         return -1;
     }
 
-    public int addFlow(int node, int newFlow) {
+    public void addFlow(int node, int newFlow) {
         if(node == startNode) {
             flow -= newFlow;
         }
         else if(node == endNode) {
             flow += newFlow;
         }
-        return -1;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public void setFlow(int flow) {
-        this.flow = flow;
     }
 
     @Override
     public String toString() {
-        return "Edge{" +
-                "startNode=" + startNode +
-                ", endNode=" + endNode +
-                ", capacity=" + capacity +
-                ", flow=" + flow +
-                '}';
+        return "Edge (" + startNode +
+                " > " + endNode +
+                ") Capacity = " + capacity +
+                " Flow = " + flow +
+                " |\n";
     }
 }
