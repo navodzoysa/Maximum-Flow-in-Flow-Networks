@@ -6,6 +6,7 @@ public class MaxFlow {
     private Graph graph;
     private Edge[] augmentedPathList;
     private int maxFlow;
+    private double timeTaken;
 
     public MaxFlow(int source, int sink, Graph graph) {
         this.source = source;
@@ -15,6 +16,8 @@ public class MaxFlow {
 
     public int calculateMaxFlow() {
         int flow = Integer.MAX_VALUE;
+        double startTime = System.nanoTime();
+        System.out.println("start time " +startTime);
         while (breadFirstSearch()) {
             for(int i = sink; i != source; i = augmentedPathList[i].getAdjacentNode(i)) {
                 flow = Math.min(flow, augmentedPathList[i].residualCapacity(i));
@@ -36,6 +39,8 @@ public class MaxFlow {
             System.out.println("--------------------------------------");
             maxFlow += flow;
         }
+        timeTaken = (System.nanoTime() - startTime);
+        System.out.println("end time " +(timeTaken/1000000000));
         return maxFlow;
     }
 
