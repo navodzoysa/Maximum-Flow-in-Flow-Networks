@@ -24,10 +24,13 @@ public class MaxFlow {
         this.graph = graph;
     }
 
+    public double getTimeTaken() {
+        return timeTaken;
+    }
+
     public int calculateMaxFlow() {
         int flow = Integer.MAX_VALUE;
         double startTime = System.nanoTime();
-        System.out.println("start time " +startTime);
         while (breadFirstSearch()) {
             for(int i = sink; i != source; i = augmentedPathList[i].getAdjacentNode(i)) {
                 flow = Math.min(flow, augmentedPathList[i].residualCapacity(i));
@@ -50,7 +53,7 @@ public class MaxFlow {
             maxFlow += flow;
         }
         timeTaken = (System.nanoTime() - startTime);
-        System.out.println("end time " +(timeTaken/1000000000));
+        timeTaken = Math.round((timeTaken/1000000)*100.0)/100.0;
         return maxFlow;
     }
 

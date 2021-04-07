@@ -26,6 +26,13 @@ public class Main {
         graph.printGraph();
 
         MaxFlow maxFlow = new MaxFlow(source, sink, graph);
-        System.out.println("Max Flow = " + maxFlow.calculateMaxFlow());
+        int maximumFlow = maxFlow.calculateMaxFlow();
+        System.out.println("--------------------------------------");
+        System.out.println("Statistics for " + parser.getFileName());
+        System.out.println("--------------------------------------");
+        System.out.println("Number of Nodes - " + graph.getNumberOfNodes());
+        System.out.println("Number of Edges - " + graph.getNumberOfEdges());
+        System.out.println("Max flow - " + maximumFlow);
+        System.out.println("Time taken - " + maxFlow.getTimeTaken() + "ms");
     }
 }

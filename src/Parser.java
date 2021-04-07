@@ -21,6 +21,10 @@ public class Parser {
         this.fileName = fileName;
     }
 
+    public String getFileName() {
+        return fileName.substring(14);
+    }
+
     public List<List<Integer>> readFile() {
         List<List<Integer>> graphData = new ArrayList<>();
         List<Integer> innerGraphData;
