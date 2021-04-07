@@ -1,3 +1,14 @@
+/* *****************************************************************************
+ *  Name:    Navod Zoysa
+ *  UoW ID:  w1761781
+ *  IIT ID:  2015154
+ *
+ *  Description:  Main program to parse the input files and generate a flow
+ *                network then calculate max flow.
+ *
+ *  Written:       08/04/2021
+ **************************************************************************** */
+
 import java.util.List;
 
 public class Main {

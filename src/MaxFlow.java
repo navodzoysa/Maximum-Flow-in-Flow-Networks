@@ -1,3 +1,13 @@
+/* *****************************************************************************
+ *  Name:    Navod Zoysa
+ *  UoW ID:  w1761781
+ *  IIT ID:  2015154
+ *
+ *  Description:  Calculates the max flow given using breadth first search.
+ *
+ *  Written:       08/04/2021
+ **************************************************************************** */
+
 import java.util.*;
 
 public class MaxFlow {

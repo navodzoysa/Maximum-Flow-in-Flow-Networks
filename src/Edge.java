@@ -1,3 +1,14 @@
+/* *****************************************************************************
+ *  Name:    Navod Zoysa
+ *  UoW ID:  w1761781
+ *  IIT ID:  2015154
+ *
+ *  Description:  Class made to contain the nodes to and from in an edge with
+ *                their respestive capacity and flow.
+ *
+ *  Written:       08/04/2021
+ **************************************************************************** */
+
 public class Edge {
     private int startNode;
     private int endNode;

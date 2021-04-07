@@ -1,3 +1,13 @@
+/* *****************************************************************************
+ *  Name:    Navod Zoysa
+ *  UoW ID:  w1761781
+ *  IIT ID:  2015154
+ *
+ *  Description:  Parses the input files into an arraylist of integers.
+ *
+ *  Written:       08/04/2021
+ **************************************************************************** */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

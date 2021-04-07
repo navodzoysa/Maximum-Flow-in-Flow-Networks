@@ -1,3 +1,14 @@
+/* *****************************************************************************
+ *  Name:    Navod Zoysa
+ *  UoW ID:  w1761781
+ *  IIT ID:  2015154
+ *
+ *  Description:  Creates a graph given a list of integers and creates the
+ *                relevant edges for that graph.
+ *
+ *  Written:       08/04/2021
+ **************************************************************************** */
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
