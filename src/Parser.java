@@ -1,3 +1,13 @@
+/* *****************************************************************************
+ *  Name:    Navod Zoysa
+ *  UoW ID:  w1761781
+ *  IIT ID:  2015154
+ *
+ *  Description:  Parses the input files into an arraylist of integers.
+ *
+ *  Written:       08/04/2021
+ **************************************************************************** */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,19 +21,24 @@ public class Parser {
         this.fileName = fileName;
     }
 
+    public String getFileName() {
+        return fileName.substring(14);
+    }
+
     public List<List<Integer>> readFile() {
         List<List<Integer>> graphData = new ArrayList<>();
         List<Integer> innerGraphData;
+
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String node = bufferedReader.readLine();
+            String node = bufferedReader.readLine().trim();
 
             innerGraphData = new ArrayList<>();
             innerGraphData.add(Integer.parseInt(node));
             graphData.add(innerGraphData);
 
-            String edges = "";
+            String edges;
             while((edges = bufferedReader.readLine()) != null) {
                 String [] spliter = edges.split(" ");
                 innerGraphData = new ArrayList<>();
@@ -32,9 +47,9 @@ public class Parser {
                 }
                 graphData.add(innerGraphData);
             }
-            System.out.println(graphData);
             bufferedReader.close();
             fileReader.close();
+            System.out.println("Flow network from " + fileName.substring(14) + " parsed and loaded succesfully");
         } catch (IOException e) {
             e.printStackTrace();
         }

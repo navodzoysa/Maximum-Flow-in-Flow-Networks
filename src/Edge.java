@@ -1,3 +1,14 @@
+/* *****************************************************************************
+ *  Name:    Navod Zoysa
+ *  UoW ID:  w1761781
+ *  IIT ID:  2015154
+ *
+ *  Description:  Class made to contain the nodes to and from in an edge with
+ *                their respestive capacity and flow.
+ *
+ *  Written:       08/04/2021
+ **************************************************************************** */
+
 public class Edge {
     private int startNode;
     private int endNode;
@@ -26,25 +37,41 @@ public class Edge {
         return flow;
     }
 
-    public void getParentNode() {
-
+    public int getAdjacentNode(int node) {
+        if(node == startNode) {
+            return endNode;
+        }
+        else if(node == endNode) {
+            return startNode;
+        }
+        return -1;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public int residualCapacity(int node) {
+        if(node == startNode) {
+            return flow;
+        }
+        else if(node == endNode) {
+            return capacity - flow;
+        }
+        return -1;
     }
 
-    public void setFlow(int flow) {
-        this.flow = flow;
+    public void addFlow(int node, int newFlow) {
+        if(node == startNode) {
+            flow -= newFlow;
+        }
+        else if(node == endNode) {
+            flow += newFlow;
+        }
     }
 
     @Override
     public String toString() {
-        return "Edge{" +
-                "startNode=" + startNode +
-                ", endNode=" + endNode +
-                ", capacity=" + capacity +
-                ", flow=" + flow +
-                '}';
+        return "Edge (" + startNode +
+                " > " + endNode +
+                ") Capacity = " + capacity +
+                " Flow = " + flow +
+                " |\n";
     }
 }
