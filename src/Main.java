@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Parser parser = new Parser("../benchmarks/bridge_1.txt");
+        Parser parser = new Parser("src/benchmarks/bridge_1.txt");
         List<List<Integer>> parsedList = parser.readFile();
 
         Graph graph = new Graph(parsedList);
